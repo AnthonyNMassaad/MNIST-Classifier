@@ -57,7 +57,7 @@ The script will:
 2. Split data into train/test sets (80/20 split with stratification)
 3. Train and evaluate all five models
 4. Display performance metrics (accuracy, precision, F1)
-5. Generate a comparison bar chart
+5. Generate and save plots in `outputs` folder (batch grid, confusion matrices, histograms, comparison bar chart)
 
 ## Configuration
 
@@ -116,7 +116,15 @@ The program outputs:
 - Training progress for each model (loss and accuracy per epoch)
 - Test set metrics: accuracy, precision, F1-score
 - Comparison table of all models
-- Bar chart comparing model performance
+- Figures saved in `outputs/`:
+	- `batch_grid.png` — sample images from a batch
+	- `confusion_*.png` — confusion matrices for each model
+	- `linear_weights.png` — visualized weights of the linear classifier
+	- `hist_labels_train.png` — training label distribution
+	- `hist_preds_cnn.png` — CNN predicted label distribution
+	- `metrics_comparison.png` — bar chart comparing model performance
+
+Open the images directly in VS Code's Explorer under the `outputs/` folder.
 
 ## Hardware Acceleration
 

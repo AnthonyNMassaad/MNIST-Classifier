@@ -18,7 +18,6 @@ def extract(zip_path):
         raise
 
 if __name__ == "__main__":
-    # check if there is a zip file in the current directory
     current_dir = Path('.')
     zip_files = list(current_dir.glob('*.zip'))
     if not zip_files:
