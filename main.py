@@ -18,7 +18,6 @@ from trainer import train_linear, train_classifier
 from cnn_train import train_cnn
 from figures import show_batch_images, visualize_linear_weights
 
-
 def main():
     print("\nEnvironment")
     print("Using device:", device)
@@ -32,14 +31,14 @@ def main():
     print("Flat loader pixel range:", float(x_flat.min()), "to", float(x_flat.max()))
 
     print("\nCreating Train/Test Partitions")
-    # Split into numpy train/test
+    # train/test
     x_all, y_all, x_train, y_train, x_test, y_test = make_numpy_partitions(flat_loader)
     print("Train shape:", x_train.shape)
     print("Test shape: ", x_test.shape)
 
     # KNN
-    print("\nK-Nearest Neighbors (KNN)")
-    print("Running k-NN for multiple k values...")
+    print("\nKNN")
+    print("Running KNN...")
     k_values = [1, 3, 5]
     knn_metrics = {}
     for k in k_values:
@@ -50,8 +49,8 @@ def main():
         print(f"    metrics: {metrics_knn_k}")
 
     # Naive Bayes
-    print("\nNaive Bayes (Bernoulli)")
-    print("Binarizing data with threshold 0.5 and fitting Bernoulli NB...")
+    print("\nNaive Bayes")
+    print("Binarizing data with threshold 0.5...")
     x_train_bin = binarize(x_train, 0.5)
     x_test_bin = binarize(x_test, 0.5)
     priors, theta = fit_bernoulli(x_train_bin, y_train, n_classes=N_CLASSES, alpha=1.0)
@@ -62,7 +61,7 @@ def main():
     cm_nb = confusion_matrix_np(y_test, y_pred_nb, n_classes=N_CLASSES)
 
     # Linear
-    print("\nLinear Classifier (L2 Loss)")
+    print("\nLinear Classifier")
     print("Preparing tensors and training linear model...")
     xtr_lin, ytr_lin = to_tensor(x_train, y_train)
     xte_lin, yte_lin = to_tensor(x_test, y_test)
@@ -85,7 +84,7 @@ def main():
     print("MLP metrics:", metrics_mlp)
 
     # CNN
-    print("\nConvolutional Neural Network (CNN)")
+    print("\nCNN")
     print("Converting to image tensors and training CNN...")
     train_ds_cnn, test_ds_cnn = to_image_tensors(x_train, y_train, x_test, y_test)
     cnn_model = SimpleCNN()
